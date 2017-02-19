@@ -1,0 +1,108 @@
+<html>
+<head>
+<style>
+	div.console { font-size: 14px }
+	div.console div.jquery-console-inner
+	 { width:900px; height:200px; background:#333; padding:0.5em;
+	   overflow:auto }
+	div.console div.jquery-console-prompt-box
+	 { color:#fff; font-family:monospace; }
+	div.console div.jquery-console-focus span.jquery-console-cursor
+	 { background:#fefefe; color:#333; font-weight:bold }
+	div.console div.jquery-console-message-error
+	 { color:#ef0505; font-family:sans-serif; font-weight:bold;
+	   padding:0.1em; }
+	div.console div.jquery-console-message-value
+	 { color:#1ad027; font-family:monospace;
+	   padding:0.1em; }
+	div.console div.jquery-console-message-type
+	 { color:#52666f; font-family:monospace;
+	   padding:0.1em; }
+	div.console span.jquery-console-prompt-label { font-weight:bold }
+	div.console div.jquery-console-welcome {
+		color:#1ad027;
+	}
+/*  html, body {
+    height: 100%;
+    margin: 0;
+  }*/
+
+html, body, div.console {
+    /* Height and width fallback for older browsers. */
+    height: 100%;
+    width: 100%;
+
+    /* Set the height to match that of the viewport. */
+    height: 100vh;
+
+    /* Set the width to match that of the viewport. */
+    width: 100vw;
+
+    /* Remove any browser-default margins. */
+    margin: 0;
+}
+</style>
+</head>
+<body>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script type="text/javascript" src="lib/jquery.console.js"></script>
+<script type="text/javascript">
+	var welcomeMessage = "Hi, my name is Anurag Baddam, and I am currently a student studying Electrical Engineering and Computer Science (EECS) at UC Berkeley. Welcome to my website/shell where you can learn everything about me!"
+  $(document).ready(function(){
+		var container = $('<div class="console">');
+		$('body').append(container);
+		var controller = container.console({
+		  promptLabel: 'arbsh> ',
+		  commandValidate:function(line){
+		    if (line == "") return false;
+		    else return true;
+		  },
+		  commandHandle:function(line){
+		  		command = line.split(" ")[0]
+		  		args = line.split(" ").slice(1)
+		  		if (command == "ls") {
+		  			msg = "hello.txt contact.txt"
+		  		}
+			    else if (command == "cat") {
+			    	file = args[0]
+			    	if (file == "hello.txt") {
+			    		msg = "Hello, I'm Anurag! Glad to see cat is working!"
+			    	} else if (file == "contact.txt") {
+			    		msg = ""
+			    		msg += "-------------------------------------------------------\n"
+			    		msg += "Anurag Baddam\n"
+			    		msg += "EECS at UC Berkeley\n"
+			    		msg += "Email: baddamanu@berkeley.edu\n"
+			    		msg += "Phone: (813) 523 1555\n"
+			    		msg += "LinkedIn: https://www.linkedin.com/in/anuragbaddam/\n"
+			    		msg += "Github: https://github.com/arb625\n"
+			    		msg += "-------------------------------------------------------\n"
+			    	}
+			    } else if (command == "help") {
+			    	if (args.length == 0) {
+			    		msg = "The supported commands are:\n ls cat help exit\n You can see the description for a command with 'help <command>'"
+			    	}
+			    } else {
+			    	msg = "Sorry that command is not supported. Try typing 'help' to see the list of supported commands."
+			    }
+		      return [{msg: msg,
+		               className:"jquery-console-message-value"}]
+		  },
+		  autofocus:true,
+		  animateScroll:true,
+		  promptHistory:true,
+		  charInsertTrigger:function(keycode,line){
+		  	return true;
+		  },
+		  welcomeMessage: welcomeMessage
+		});
+		
+		
+
+	});
+</script>
+</body>
+</html>
