@@ -3,7 +3,7 @@
 <style>
 	div.console { font-size: 14px }
 	div.console div.jquery-console-inner
-	 { width:900px; height:200px; background:#333; padding:0.5em;
+	 { background:#333; padding:0.5em;
 	   overflow:auto }
 	div.console div.jquery-console-prompt-box
 	 { color:#fff; font-family:monospace; }
@@ -21,26 +21,17 @@
 	div.console span.jquery-console-prompt-label { font-weight:bold }
 	div.console div.jquery-console-welcome {
 		color:#1ad027;
+		text-align: center;
+		font-size: 16px;
+		font-family: "Courier New", Courier, monospace;
 	}
-/*  html, body {
-    height: 100%;
-    margin: 0;
-  }*/
-
-html, body, div.console {
-    /* Height and width fallback for older browsers. */
-    height: 100%;
-    width: 100%;
-
-    /* Set the height to match that of the viewport. */
-    height: 100vh;
-
-    /* Set the width to match that of the viewport. */
-    width: 100vw;
-
-    /* Remove any browser-default margins. */
-    margin: 0;
-}
+	div.console div.jquery-console-inner {
+		height: 100vh;
+		width: 100vw;
+	}
+	body{
+	  margin:0px;
+	}
 </style>
 </head>
 <body>
@@ -48,9 +39,10 @@ html, body, div.console {
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <script type="text/javascript" src="lib/jquery.console.js"></script>
 <script type="text/javascript">
-	var welcomeMessage = "Hi, my name is Anurag Baddam, and I am currently a student studying Electrical Engineering and Computer Science (EECS) at UC Berkeley. Welcome to my website/shell where you can learn everything about me!"
+	var welcomeMessage = "Hi, my name is Anurag Baddam, and I am currently a student studying Electrical Engineering and Computer Science (EECS) at UC Berkeley. Welcome to my website/shell where you can learn everything about me! Try typing 'ls' to see what files there are for you to play with and try 'help' to navigate around."
   $(document).ready(function(){
 		var container = $('<div class="console">');
 		$('body').append(container);
@@ -63,10 +55,10 @@ html, body, div.console {
 		  commandHandle:function(line){
 		  		command = line.split(" ")[0]
 		  		args = line.split(" ").slice(1)
+		  		files = ["hello.txt", "contact.txt", "Resume", "Github", "LinkedIn"]
 		  		if (command == "ls") {
-		  			msg = "hello.txt contact.txt"
-		  		}
-			    else if (command == "cat") {
+		  			msg = files.join(" ")
+		  		} else if (command == "cat") {
 			    	file = args[0]
 			    	if (file == "hello.txt") {
 			    		msg = "Hello, I'm Anurag! Glad to see cat is working!"
@@ -80,16 +72,24 @@ html, body, div.console {
 			    		msg += "LinkedIn: https://www.linkedin.com/in/anuragbaddam/\n"
 			    		msg += "Github: https://github.com/arb625\n"
 			    		msg += "-------------------------------------------------------\n"
-			    	}
+			    	} 
 			    } else if (command == "help") {
 			    	if (args.length == 0) {
-			    		msg = "The supported commands are:\n ls cat help exit\n You can see the description for a command with 'help <command>'"
+			    		msg = "The supported commands are:\n ls cat open help exit\n You can see the description for a command with 'help <command>'"
 			    	}
-			    } else {
-			    	msg = "Sorry that command is not supported. Try typing 'help' to see the list of supported commands."
-			    }
-		      return [{msg: msg,
-		               className:"jquery-console-message-value"}]
+			    } else if (command == "open") {
+			    	file = args[0]
+			    	if (file == "Resume") {
+			    		window.open("Resume.pdf");
+			    	} else if (file == "Github") {
+			    		window.open("https://github.com/arb625");
+			    	} else if (file == "LinkedIn") {
+			    		window.open("https://www.linkedin.com/in/anuragbaddam/");
+			    	} 
+			    }	else {
+			    	msg = "Sorry, that command is not supported. Try typing 'help' to see the list of supported commands."
+		    	}
+		      return [{msg: msg, className:"jquery-console-message-value"}]
 		  },
 		  autofocus:true,
 		  animateScroll:true,
@@ -97,7 +97,7 @@ html, body, div.console {
 		  charInsertTrigger:function(keycode,line){
 		  	return true;
 		  },
-		  welcomeMessage: welcomeMessage
+		  welcomeMessage: welcomeMessage,
 		});
 		
 		
