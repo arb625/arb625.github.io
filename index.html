@@ -1,37 +1,44 @@
 <html>
 <head>
 <style>
-	div.console { font-size: 14px }
-	div.console div.jquery-console-inner
-	 { background:#333; padding:0.5em;
-	   overflow:auto }
-	div.console div.jquery-console-prompt-box
-	 { color:#fff; font-family:monospace; }
-	div.console div.jquery-console-focus span.jquery-console-cursor
-	 { background:#fefefe; color:#333; font-weight:bold }
-	div.console div.jquery-console-message-error
-	 { color:#ef0505; font-family:sans-serif; font-weight:bold;
-	   padding:0.1em; }
-	div.console div.jquery-console-message-value
-	 { color:#1ad027; font-family:monospace;
-	   padding:0.1em; }
-	div.console div.jquery-console-message-type
-	 { color:#52666f; font-family:monospace;
-	   padding:0.1em; }
-	div.console span.jquery-console-prompt-label { font-weight:bold }
-	div.console div.jquery-console-welcome {
-		color:#1ad027;
-		text-align: center;
-		font-size: 16px;
-		font-family: "Courier New", Courier, monospace;
-	}
-	div.console div.jquery-console-inner {
-		height: 100vh;
-		width: 100vw;
-	}
-	body{
-	  margin:0px;
-	}
+  div.console { font-size: 14px }
+  div.console div.jquery-console-inner
+   { background:#333; padding:0.5em;
+     overflow:auto }
+  div.console div.jquery-console-prompt-box
+   { color:#fff; font-family:monospace; }
+  div.console div.jquery-console-focus span.jquery-console-cursor
+   { background:#fefefe; color:#333; font-weight:bold }
+  div.console div.jquery-console-message-error
+   { color:#ef0505; font-family:sans-serif; font-weight:bold;
+     padding:0.1em; }
+  div.console div.jquery-console-message-value
+   { color:#1ad027; font-family:monospace;
+     padding:0.1em; }
+  div.console div.jquery-console-message-type
+   { color:#52666f; font-family:monospace;
+     padding:0.1em; }
+  div.console span.jquery-console-prompt-label { font-weight:bold }
+  div.console div.jquery-console-welcome {
+    color:#1ad027;
+    text-align: center;
+    font-size: 16px;
+    font-family: "Courier New", Courier, monospace;
+  }
+  div.console div.jquery-console-inner {
+    height: 98vh;
+    width: 99.1vw;
+  }
+  body {
+    margin:0px;
+  }
+  div.console div.jquery-console-welcome {
+    color: #c3d01a;
+    white-space: pre;
+  }
+  div.console span.jquery-console-prompt-label {
+    color: hsla(183, 100%, 50%, 0.76);
+  }
 </style>
 </head>
 <body>
@@ -39,70 +46,7 @@
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <script type="text/javascript" src="lib/jquery.console.js"></script>
-<script type="text/javascript">
-	var welcomeMessage = "Hi, my name is Anurag Baddam, and I am currently a student studying Electrical Engineering and Computer Science (EECS) at UC Berkeley. Welcome to my website/shell where you can learn everything about me! Try typing 'ls' to see what files there are for you to play with and try 'help' to navigate around."
-  $(document).ready(function(){
-		var container = $('<div class="console">');
-		$('body').append(container);
-		var controller = container.console({
-		  promptLabel: 'arbsh> ',
-		  commandValidate:function(line){
-		    if (line == "") return false;
-		    else return true;
-		  },
-		  commandHandle:function(line){
-		  		command = line.split(" ")[0]
-		  		args = line.split(" ").slice(1)
-		  		files = ["hello.txt", "contact.txt", "Resume", "Github", "LinkedIn"]
-		  		if (command == "ls") {
-		  			msg = files.join(" ")
-		  		} else if (command == "cat") {
-			    	file = args[0]
-			    	if (file == "hello.txt") {
-			    		msg = "Hello, I'm Anurag! Glad to see cat is working!"
-			    	} else if (file == "contact.txt") {
-			    		msg = ""
-			    		msg += "-------------------------------------------------------\n"
-			    		msg += "Anurag Baddam\n"
-			    		msg += "EECS at UC Berkeley\n"
-			    		msg += "Email: baddamanu@berkeley.edu\n"
-			    		msg += "Phone: (813) 523 1555\n"
-			    		msg += "LinkedIn: https://www.linkedin.com/in/anuragbaddam/\n"
-			    		msg += "Github: https://github.com/arb625\n"
-			    		msg += "-------------------------------------------------------\n"
-			    	} 
-			    } else if (command == "help") {
-			    	if (args.length == 0) {
-			    		msg = "The supported commands are:\n ls cat open help exit\n You can see the description for a command with 'help <command>'"
-			    	}
-			    } else if (command == "open") {
-			    	file = args[0]
-			    	if (file == "Resume") {
-			    		window.open("Resume.pdf");
-			    	} else if (file == "Github") {
-			    		window.open("https://github.com/arb625");
-			    	} else if (file == "LinkedIn") {
-			    		window.open("https://www.linkedin.com/in/anuragbaddam/");
-			    	} 
-			    }	else {
-			    	msg = "Sorry, that command is not supported. Try typing 'help' to see the list of supported commands."
-		    	}
-		      return [{msg: msg, className:"jquery-console-message-value"}]
-		  },
-		  autofocus:true,
-		  animateScroll:true,
-		  promptHistory:true,
-		  charInsertTrigger:function(keycode,line){
-		  	return true;
-		  },
-		  welcomeMessage: welcomeMessage,
-		});
-		
-		
-
-	});
-</script>
+<script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
