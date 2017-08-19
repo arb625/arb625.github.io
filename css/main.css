@@ -1,6 +1,6 @@
 div.console { font-size: 14px }
 div.console div.jquery-console-inner
- { background:#333; padding:0.5em;
+ { background:black; padding:0.5em;
    overflow:auto }
 div.console div.jquery-console-prompt-box
  { color:#fff; font-family:monospace; }
