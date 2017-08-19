@@ -14,9 +14,9 @@ $(document).ready(function(){
   $('body').append(container);
   var controller = container.console({
     promptLabel: 'arbsh> ',
-    autofocus:true,
+    autofocus: true,
     welcomeMessage: welcomeMessage,
-    commandHandle:function(line) {
+    commandHandle: function(line) {
       line = $.trim(line);
       if (line == "") {
         return "";
@@ -29,9 +29,11 @@ $(document).ready(function(){
       var links = ["Resume", "Github", "LinkedIn"];
       
       var msg = "";
+      var error = false;
       if (command == "ls") {
 
         if (args.length > 0) {
+          error = true;
           msg = "ls does not take any arguments.";
         } else {
           msg = files.join(" ") + " " + links.join(" ");
@@ -40,8 +42,10 @@ $(document).ready(function(){
       } else if (command == "cat") {
 
         if (args.length == 0) {
+          error = true;
           msg = "Please pass in a file to cat.";
         } else if (args.length > 1) {
+          error = true;
           msg = "Too many arguments to cat.";
         }
         else {
@@ -61,8 +65,10 @@ $(document).ready(function(){
               msg += "-------------------------------------------------------\n";
             }
           } else if (links.includes(file)) {
+            error = true;
             msg = "Seems like you tried to cat a link. Try 'open <link>' instead.";
           } else {
+            error = true;
             msg = "No such file.";
           }
         }
@@ -70,8 +76,10 @@ $(document).ready(function(){
       } else if (command == "open") {
 
         if (args.length == 0) {
+          error = true;
           msg = "Please pass in a link to open.";
         } else if (args.length > 1) {
+          error = true;
           msg = "Too many arguments to open.";
         }
         else {
@@ -85,8 +93,10 @@ $(document).ready(function(){
               window.open("https://www.linkedin.com/in/anuragbaddam/");
             }
           } else if (files.includes(link)) {
+            error = true;
             msg = "Seems like you tried to open a file. Try 'cat <file>' instead.";
           } else {
+            error = true;
             msg = "No such link.";
           }
         }
@@ -94,6 +104,7 @@ $(document).ready(function(){
       } else if (command == "help") {
 
         if (args.length > 1) {
+          error = true;
           msg = "Too many arguments to help.";
         } else if (args.length == 0) {
           msg = "";
@@ -112,6 +123,7 @@ $(document).ready(function(){
           } else if (command == "help") {
             msg = "help [command]: Get general info or info about the usage of a specific command.";
           } else {
+            error = true;
             msg = "No help found as that command does not exist.";
           }
         }
@@ -119,15 +131,23 @@ $(document).ready(function(){
       } else if (command == "clear") {
 
         if (args.length > 0) {
+          error = true;
           msg = "clear does not take any arguments.";
         } else {
           msg = "Please press Ctrl+L to clear the console.";
         }
 
       } else {
+        error = true;
         msg = "Sorry, that command is not supported. Try typing 'help' to see the list of supported commands.";
       }
-      return [{msg: msg, className:"jquery-console-message-value"}]
+      var class_name = null
+      if (error) {
+        class_name = "jquery-console-error-value"
+      } else {
+        class_name = "jquery-console-message-value" 
+      }
+      return [{msg: msg, className: class_name}]
     },
   });
 });

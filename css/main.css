@@ -1,0 +1,44 @@
+div.console { font-size: 14px }
+div.console div.jquery-console-inner
+ { background:#333; padding:0.5em;
+   overflow:auto }
+div.console div.jquery-console-prompt-box
+ { color:#fff; font-family:monospace; }
+div.console div.jquery-console-focus span.jquery-console-cursor
+ { background:#fefefe; color:#333; font-weight:bold }
+div.console div.jquery-console-message-error
+ { color:#ef0505; font-family:sans-serif; font-weight:bold;
+   padding:0.1em; }
+div.console div.jquery-console-message-value
+ { color:#1ad027; font-family:monospace;
+   padding:0.1em; }
+div.console div.jquery-console-message-type
+ { color:#52666f; font-family:monospace;
+   padding:0.1em; }
+div.console span.jquery-console-prompt-label { font-weight:bold }
+div.console div.jquery-console-welcome {
+  color:#1ad027;
+  text-align: center;
+  font-size: 16px;
+  font-family: "Courier New", Courier, monospace;
+}
+div.console div.jquery-console-inner {
+  height: 98vh;
+  width: 99.1vw;
+}
+body {
+  margin:0px;
+}
+div.console div.jquery-console-welcome {
+  color: #c3d01a;
+  white-space: pre;
+}
+div.console span.jquery-console-prompt-label {
+  color: hsla(183, 100%, 50%, 0.76);
+}
+div.console div.jquery-console-error-value {
+  font-size: 14px;
+  font-family: monospace;
+  padding: 0.1em;
+  color: red;
+}
