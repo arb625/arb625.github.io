@@ -52,13 +52,13 @@ $(document).ready(function(){
           var file = args[0];
           if (files.includes(file)) {
             if (file == "hello.txt") {
-              msg = "Hello, my name is Anurag Baddam, and I'm currently a senior studying Computer Science and Statistics at UC Berkeley. My fields of interest include Data Science, Machine Learning, and Computer Security, but I mostly just like building cool things! Welcome to my website/shell where you can learn everything about me! Try typing 'ls' to see what files there are for you to play with and try 'help' if you're stuck.";
+              msg = "Hello, my name is Anurag Baddam, and I'm a software engineer currently working at Salesforce. I graduated from UC Berkeley, where I studied Computer Science and Statistics. My fields of interest include Data Science, Machine Learning, and Computer Security, but I mostly just like building cool things! Welcome to my website/shell where you can learn everything about me! Try typing 'ls' to see what files there are for you to play with and try 'help' if you're stuck.";
             } else if (file == "contact.txt") {
               msg = "";
               msg += "-------------------------------------------------------\n";
               msg += "Anurag Baddam\n";
-              msg += "EECS and Statistics at UC Berkeley\n";
-              msg += "Email: baddamanu@berkeley.edu\n";
+              msg += "Software Engineer at Salesforce\n";
+              msg += "Email: baddamanu@gmail.com\n";
               msg += "Phone: (813) 523 1555\n";
               msg += "LinkedIn: https://www.linkedin.com/in/anuragbaddam/\n";
               msg += "Github: https://github.com/arb625\n";
