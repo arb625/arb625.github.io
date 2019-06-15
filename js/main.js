@@ -158,9 +158,7 @@ var konami_input = ""
 var konami_pattern = "38384040373937396665"
 
 function checkKonamiCode(e) {
-  console.log(e)
   konami_input += e ? e.keyCode : event.keyCode;
-  console.log(konami_input)
   if (konami_input.length > konami_pattern.length) {
       konami_input = konami_input.substr((konami_input.length - konami_pattern.length));
   }
