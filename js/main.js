@@ -9,7 +9,8 @@ var welcomeMessage = String.raw`
         \/     \/                  \//_____/                    `
 
 
-$(document).ready(function(){
+$(document).ready(function() {
+
   var container = $('<div class="console">');
   $('body').append(container);
   var controller = container.console({
@@ -150,4 +151,25 @@ $(document).ready(function(){
       return [{msg: msg, className: class_name}]
     },
   });
+
 });
+
+var konami_input = ""
+var konami_pattern = "38384040373937396665"
+
+function checkKonamiCode(e) {
+  console.log(e)
+  konami_input += e ? e.keyCode : event.keyCode;
+  console.log(konami_input)
+  if (konami_input.length > konami_pattern.length) {
+      konami_input = konami_input.substr((konami_input.length - konami_pattern.length));
+  }
+  if (konami_input === konami_pattern) {
+      window.location.href = 'https://www.facebook.com/anurag.baddam';
+      konami_input = "";
+      e.preventDefault();
+      return false;
+  }
+}
+
+document.addEventListener('keydown', checkKonamiCode, true);
